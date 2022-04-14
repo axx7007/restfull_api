@@ -31,6 +31,16 @@ export const Count = () => {
       .then((res) => res.json())
       .then((res) => getData());
   };
+  const onDelete = (id) => {
+    fetch(`${url}/api/v1/houses/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => getData());
+  };
   return (
     <div>
       <h5>Restfull Api</h5>
@@ -44,6 +54,7 @@ export const Count = () => {
               onChange={(e) => setAddress(e.target.value)}
             />
             <button onClick={() => onUpdate(value.id)}>Update</button>
+            <button onClick={() => onDelete(value.id)}>Delete</button>
           </div>
         );
       })}
